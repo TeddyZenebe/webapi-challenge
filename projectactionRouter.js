@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', (req, res)=> {
     projectDb.get()
-             .then(project=>{res.status(200).json(project)})
+             .then(projects=>{res.status(200).json(projects)})
              .catch(error=>{
                  console.log(error)
                  res.status(500).json({message: 'The projects information could not be retrieved.'})
@@ -62,6 +62,7 @@ router.put('/:id', (req, res) => {
 // CRUD operation apis for action
 
 router.get('/actions', (req, res)=> {
+        console.log('hellow')
     actionDb.get()
              .then(action=>{res.status(200).json(action)})
              .catch(error=>{
@@ -69,6 +70,16 @@ router.get('/actions', (req, res)=> {
                  res.status(500).json({message: 'The action information could not be retrieved.'})
              })
 })
+
+router.get('/actions/:id', (req, res) => {
+        const id = req.params.id
+        actionDb.get(id)
+                .then(action => res.status(200).json(action))
+                .catch(error => {
+                        console.log(error)
+                        res.status(500).json({ message: 'Error processing request' })
+                })
+});
 
 router.post('/:id/actions', (req, res) => {
     const project_id = req.params.id
@@ -104,5 +115,19 @@ router.put('/actions/:id', (req, res) => {
             })
 
 });
+
+
+//since the two resource are created in the same route i need to move this get by id to the end so that '/action' could work
+router.get('/:id', (req, res) => {
+        console.log('hi')
+        const id = req.params.id
+        projectDb.get(id)
+                .then(project => res.status(200).json(project))
+                .catch(error => {
+                        console.log(error)
+                        res.status(500).json({ message: 'Error processing request' })
+                })
+});
+
 
 module.exports = router;
