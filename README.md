@@ -26,13 +26,24 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+express.Router, express.jason()
+
 - [ ] Describe Middleware?
+
+Middleware functions are functions that have access to the request object ( req ), the response object ( res ), and the next function in the application's request-response cycle. They provides an easy way to add modularity to our code by building small functions that will be used in different CRUD operation
+
 
 - [ ] Describe a Resource?
 
+A resource is an object with a type, associated data, relationships to other resources, and a set of methods that operate on it.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+ a status code of 200 and and the required json data 
+
 - [ ] How can we partition our application into sub-applications?
+
+  we need to create router (using express.Router() and server.use(sub-application path, the router)) for each different aplication
 
 ## Project Setup
 
